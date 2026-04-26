@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>A Couple of Tools | Handyman Services</title>
+  <style>
+    :root{
+      --black:#050606;
+      --coal:#0b0d0d;
+      --panel:#141717;
+      --panel2:#1b1f1f;
+      --line:rgba(255,255,255,.18);
+      --softline:rgba(255,255,255,.08);
+      --white:#f5f2e8;
+      --muted:#b8b5aa;
+      --steel:#9aa4aa;
+      --orange:#ff9412;
+      --orange2:#ffb347;
+      --shadow:0 30px 90px rgba(0,0,0,.65);
+      --headline:Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      --body:Arial, Helvetica, sans-serif;
+    }
+
+    *{box-sizing:border-box;margin:0;padding:0}
+    html{scroll-behavior:smooth;background:#050606}
+    body{
+      min-height:100vh;
+      font-family:var(--body);
+      color:var(--white);
+      background:
+        radial-gradient(circle at 72% 8%, rgba(255,148,18,.12), transparent 27rem),
+        radial-gradient(circle at 18% 28%, rgba(255,255,255,.04), transparent 22rem),
+        linear-gradient(180deg,#050606 0%,#0c0e0e 42%,#060707 100%);
+      overflow-x:hidden;
+    }
+
+    body:before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      z-index:-1;
+      opacity:.12;
+      background-image:
+        linear-gradient(rgba(255,255,255,.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.08) 1px, transparent 1px);
+      background-size:52px 52px;
+      mask-image:linear-gradient(to bottom, #000, transparent 78%);
+    }
+
+    a{color:inherit;text-decoration:none}
+    img{display:block;max-width:100%}
+    .wrap{width:min(1200px,92vw);margin:0 auto}
+    .orange{color:var(--orange)}
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:.85rem;
+      min-height:52px;
+      padding:0 2.1rem;
+      border-radius:6px;
+      border:1px solid rgba(255,255,255,.18);
+      background:linear-gradient(180deg,#ffad35 0%,#ff9412 52%,#ec7d00 100%);
+      color:#111;
+      font-family:var(--headline);
+      letter-spacing:.09em;
+      text-transform:uppercase;
+      font-size:1.05rem;
+      box-shadow:0 18px 42px rgba(255,148,18,.23), inset 0 1px 0 rgba(255,255,255,.45);
+      transition:transform .18s ease, filter .18s ease;
+    }
+    .btn:hover{transform:translateY(-2px);filter:saturate(1.12)}
+    .btn.outline{background:rgba(0,0,0,.2);color:var(--orange);border-color:var(--orange);box-shadow:none}
+
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:100;
+      height:86px;
+      background:rgba(7,8,8,.88);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--softline);
+    }
+    .nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:2rem}
+    .brand{display:flex;align-items:center;gap:1rem;min-width:205px}
+    .brand img{width:86px;height:86px;object-fit:contain;filter:drop-shadow(0 16px 22px rgba(0,0,0,.55))}
+    .brand-copy strong{display:block;font-family:var(--headline);font-size:1.34rem;letter-spacing:.07em;line-height:.9;text-transform:uppercase}
+    .brand-copy small{display:block;margin-top:.25rem;color:var(--muted);font-size:.62rem;letter-spacing:.25em;text-transform:uppercase}
+    .links{display:flex;align-items:center;gap:2.25rem;font-family:var(--headline);letter-spacing:.12em;text-transform:uppercase;font-size:.88rem}
+    .links a{position:relative;color:#f7f3ea;opacity:.92}
+    .links a:after{content:"";position:absolute;left:0;bottom:-.75rem;width:0;height:3px;background:var(--orange);transition:width .2s ease;border-radius:4px}
+    .links a:hover:after,.links a.active:after{width:100%}
+    .nav .btn{min-height:46px;padding-inline:1.55rem}
+
+    .hero{
+      position:relative;
+      min-height:660px;
+      isolation:isolate;
+      overflow:hidden;
+      border-bottom:1px solid var(--softline);
+      background:
+        linear-gradient(90deg, rgba(5,6,6,.98) 0%, rgba(5,6,6,.93) 31%, rgba(5,6,6,.52) 58%, rgba(5,6,6,.74) 100%),
+        radial-gradient(circle at 77% 47%, rgba(255,148,18,.18), transparent 26rem),
+        linear-gradient(135deg,#080909,#171a1a 54%,#090a0a);
+    }
+    .hero:before{
+      content:"";
+      position:absolute;inset:0;z-index:-2;
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.08) 0 1px, transparent 1px 74px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.06) 0 1px, transparent 1px 74px);
+      opacity:.12;
+      mask-image:radial-gradient(circle at 75% 42%, #000 0%, transparent 66%);
+    }
+    .hero:after{
+      content:"";
+      position:absolute;
+      left:0;right:0;bottom:0;height:155px;z-index:-1;
+      background:linear-gradient(180deg,rgba(20,10,0,0),rgba(80,41,10,.30) 52%,rgba(32,16,5,.65));
+      border-top:1px solid rgba(255,148,18,.08);
+    }
+    .hero-grid{min-height:660px;display:grid;grid-template-columns:.95fr 1.1fr;align-items:center;gap:2.5rem}
+    .hero-copy{padding:5.2rem 0 4.2rem;position:relative;z-index:3}
+    .eyebrow{display:inline-flex;align-items:center;gap:.75rem;color:var(--muted);font-size:.78rem;letter-spacing:.3em;text-transform:uppercase;font-weight:800;margin-bottom:1.35rem}
+    .eyebrow:before{content:"";width:48px;height:3px;background:var(--orange)}
+    h1{
+      font-family:var(--headline);
+      font-size:clamp(4rem,9.5vw,8.35rem);
+      letter-spacing:.045em;
+      line-height:.79;
+      text-transform:uppercase;
+      text-shadow:0 4px 0 #000, 0 20px 55px rgba(0,0,0,.55);
+    }
+    h1 .small{display:flex;align-items:center;gap:1rem;font-size:.26em;color:var(--steel);letter-spacing:.16em;margin:.19em 0 .13em}
+    h1 .small:before,h1 .small:after{content:"";height:4px;flex:1;background:var(--orange);max-width:105px}
+    h1 .rough{color:#f4efe4;background:linear-gradient(180deg,#fff,#bfc5c7);-webkit-background-clip:text;background-clip:text;color:transparent}
+    h1 .big-orange{color:var(--orange)}
+    .hero-copy p{margin:1.35rem 0 1.55rem;max-width:550px;color:#e2ded3;font-size:1.22rem;line-height:1.45;text-shadow:0 2px 8px #000}
+    .hero-copy p strong{color:var(--orange)}
+    .scribble{font-family:"Comic Sans MS","Bradley Hand",cursive;color:#aaa59a;font-size:1.05rem;letter-spacing:.06em;margin-top:.8rem;transform:rotate(-1deg)}
+    .scribble span{position:relative;display:inline-block}
+    .scribble span:after{content:"";position:absolute;left:0;right:0;bottom:-5px;height:3px;background:var(--orange);border-radius:999px;transform:rotate(-3deg)}
+    .hero-art{align-self:end;position:relative;min-height:610px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2.1rem;z-index:1}
+    .hero-art:before{content:"";position:absolute;inset:8% -6% 3% -6%;background:radial-gradient(circle at 51% 52%,rgba(255,148,18,.24),transparent 37%),linear-gradient(180deg,transparent 0%,rgba(0,0,0,.28) 100%);filter:blur(.2px);z-index:-1}
+    .hero-art img{width:min(740px,62vw);max-height:560px;object-fit:contain;filter:drop-shadow(0 34px 55px rgba(0,0,0,.66));border-radius:14px;mix-blend-mode:normal}
+
+    .services{padding:1.25rem 0 1.2rem;background:linear-gradient(180deg,#111515,#181d1d);border-bottom:1px solid var(--softline)}
+    .service-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.6rem}
+    .card{
+      min-height:210px;
+      padding:1.45rem 1.4rem 1.25rem;
+      background:linear-gradient(145deg,rgba(255,255,255,.06),rgba(255,255,255,.015));
+      border:1px solid rgba(255,255,255,.22);
+      border-radius:7px;
+      text-align:center;
+      box-shadow:inset 0 1px 0 rgba(255,255,255,.08),0 18px 44px rgba(0,0,0,.22);
+      position:relative;
+      overflow:hidden;
+    }
+    .card:before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 0%,rgba(255,255,255,.12),transparent 45%);opacity:.6}
+    .icon{height:64px;margin:0 auto .8rem;color:var(--orange);position:relative;z-index:2}
+    .icon svg{width:64px;height:64px;stroke:currentColor;filter:drop-shadow(0 8px 20px rgba(0,0,0,.35))}
+    .card h3{font-family:var(--headline);font-size:1.55rem;letter-spacing:.06em;text-transform:uppercase;position:relative;z-index:2}
+    .card p{color:#dfd9cd;line-height:1.35;font-size:.98rem;margin:.55rem auto 1rem;max-width:220px;position:relative;z-index:2}
+    .mini-line{width:70px;height:3px;background:var(--orange);margin:0 auto;position:relative;z-index:2}
+
+    section.band{padding:2rem 0;background:linear-gradient(135deg,#171a1a,#202323 48%,#111414);border-bottom:1px solid var(--softline)}
+    .why-grid{display:grid;grid-template-columns:330px 1px 1fr;gap:2.2rem;align-items:center}
+    .section-title{font-family:var(--headline);font-size:clamp(2.2rem,4vw,3.55rem);line-height:.95;letter-spacing:.05em;text-transform:uppercase}
+    .divider{height:145px;background:rgba(255,255,255,.35)}
+    .feature-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:1.4rem 2.3rem}
+    .feature{display:grid;grid-template-columns:54px 1fr;gap:1rem;align-items:start}
+    .feature svg{width:44px;height:44px;color:var(--orange);stroke:currentColor;fill:none;stroke-width:2.3}
+    .feature h4{font-family:var(--headline);font-size:1.25rem;letter-spacing:.06em;text-transform:uppercase;margin-bottom:.25rem}
+    .feature p{color:#d6d1c6;line-height:1.35;font-size:.97rem}
+
+    .work{padding:1.8rem 0 2rem;background:linear-gradient(180deg,#0a0c0c,#111414)}
+    .center-title{display:flex;align-items:center;justify-content:center;gap:2rem;margin-bottom:1.35rem;text-align:center}
+    .center-title:before,.center-title:after{content:"";width:150px;height:2px;background:rgba(255,255,255,.55)}
+    .center-title h2{font-family:var(--headline);font-size:2rem;letter-spacing:.08em;text-transform:uppercase}
+    .gallery{display:grid;grid-template-columns:repeat(6,1fr);gap:.85rem}
+    .shot{height:150px;border:1px solid rgba(255,255,255,.35);position:relative;overflow:hidden;background:#1d1d1b;box-shadow:0 12px 30px rgba(0,0,0,.35)}
+    .shot:before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.16),transparent 38%),var(--img);background-size:cover;background-position:center;filter:saturate(.95)}
+    .shot.door-before{--img:linear-gradient(100deg,#5b4b35 0 28%,#c0aa87 28% 34%,#473525 34% 100%)}
+    .shot.door-after{--img:linear-gradient(100deg,#e8e0d1 0 32%,#f8f3e7 32% 38%,#725a35 38% 100%)}
+    .shot.deck-before{--img:repeating-linear-gradient(90deg,#6e6e68 0 24px,#555752 24px 29px)}
+    .shot.deck-after{--img:repeating-linear-gradient(90deg,#9b5524 0 24px,#6f3b16 24px 29px)}
+    .shot.fan-before{--img:radial-gradient(circle at 50% 45%,#d7c8ad 0 8%,transparent 9%),linear-gradient(20deg,transparent 42%,#c7ba9e 43% 52%,transparent 53%),linear-gradient(-20deg,transparent 42%,#a7987c 43% 52%,transparent 53%),#b6aa91}
+    .shot.fan-after{--img:radial-gradient(circle at 50% 45%,#fff4d0 0 9%,transparent 10%),linear-gradient(20deg,transparent 38%,#2d2e2d 39% 48%,transparent 49%),linear-gradient(-20deg,transparent 38%,#2d2e2d 39% 48%,transparent 49%),#e6e0d1}
+    .tag{position:absolute;left:8px;bottom:8px;padding:.28rem .45rem;background:#111;color:#fff;font-family:var(--headline);letter-spacing:.07em;text-transform:uppercase;font-size:.76rem;border:1px solid rgba(255,255,255,.25)}
+    .tag.after{background:var(--orange);color:#fff}
+    .work .btn{margin:1.1rem auto 0;display:flex;width:max-content;min-height:42px;background:transparent;color:var(--orange);box-shadow:none;border-color:var(--orange)}
+
+    .testimonial{padding:2.5rem 0;background:linear-gradient(90deg,#101313,#171b1b,#090b0b);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}
+    .quote-grid{display:grid;grid-template-columns:1fr 280px 220px;gap:2rem;align-items:center}
+    .stars{color:var(--orange);font-size:1.55rem;letter-spacing:.16em;margin-bottom:.65rem}
+    blockquote{font-size:1.25rem;line-height:1.45;color:#efe9dc;max-width:680px;position:relative;padding-left:4.7rem}
+    blockquote:before{content:"“";position:absolute;left:0;top:-2.7rem;font-size:8rem;color:rgba(255,255,255,.1);font-family:Georgia,serif}
+    .quote-name{font-family:var(--headline);color:var(--orange);font-size:1.55rem;letter-spacing:.1em;text-transform:uppercase}
+    .quote-role{color:#8f918c;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;font-weight:800;margin-top:.4rem}
+    .house{height:92px;border-left:1px solid rgba(255,255,255,.35);display:grid;place-items:center;color:var(--orange)}
+    .house svg{width:96px;height:96px;stroke:currentColor;fill:none;stroke-width:1.8}
+
+    footer{background:linear-gradient(180deg,#121414,#070808),repeating-linear-gradient(0deg,transparent 0 24px,rgba(255,255,255,.05) 24px 25px);border-top:1px solid rgba(255,255,255,.1)}
+    .footer-grid{display:grid;grid-template-columns:1.45fr repeat(3,1fr) 1.25fr;gap:0;padding:2rem 0;align-items:center}
+    .footer-title{font-family:var(--headline);font-size:clamp(2rem,3.6vw,3.1rem);line-height:.95;letter-spacing:.04em;text-transform:uppercase}
+    .foot-card{min-height:120px;border-left:1px solid rgba(255,255,255,.26);padding:0 1.45rem;text-align:center;color:#d6d1c6}
+    .foot-card svg{width:36px;height:36px;color:var(--orange);stroke:currentColor;fill:none;stroke-width:2.5;margin:0 auto .6rem}
+    .foot-card h4{font-family:var(--headline);letter-spacing:.09em;text-transform:uppercase;color:#fff;font-size:1rem}
+    .foot-card strong{display:block;font-size:1rem;margin:.25rem 0;color:#fff}
+    .foot-card p{font-size:.82rem;line-height:1.35;color:#a7a39a}
+    .footer-bottom{display:flex;justify-content:center;gap:1rem;align-items:center;border-top:1px solid rgba(255,255,255,.08);padding:.9rem 0;color:#807e78;font-size:.82rem}
+    .socials{margin-left:auto;display:flex;gap:.7rem}.socials span{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#9b9b9b;color:#151515;font-weight:900}
+
+    @media(max-width:1050px){
+      .links{display:none}.nav .btn{display:none}.hero-grid{grid-template-columns:1fr}.hero-copy{padding-bottom:1rem}.hero-art{min-height:auto;justify-content:flex-start;opacity:.62;margin-top:-2rem}.hero-art img{width:min(800px,100%)}.service-grid{grid-template-columns:repeat(2,1fr)}.why-grid{grid-template-columns:1fr}.divider{display:none}.gallery{grid-template-columns:repeat(3,1fr)}.quote-grid{grid-template-columns:1fr}.house{border-left:0;place-items:start}.footer-grid{grid-template-columns:1fr 1fr}.footer-grid>div:first-child,.footer-grid>div:last-child{grid-column:1/-1}.foot-card{border-left:0;border-top:1px solid rgba(255,255,255,.16);padding:1.4rem 0 0}.socials{margin-left:0}
+    }
+    @media(max-width:620px){
+      .brand-copy{display:none}.brand img{width:72px;height:72px}.nav{height:78px}.hero{min-height:auto}.hero-grid{min-height:auto}.hero-copy{padding:3.4rem 0 1rem}h1{font-size:4.2rem}.hero-copy p{font-size:1.05rem}.hero-art{display:none}.service-grid,.feature-grid,.gallery,.footer-grid{grid-template-columns:1fr}.center-title:before,.center-title:after{width:36px}.shot{height:185px}blockquote{padding-left:0;font-size:1.05rem}blockquote:before{display:none}.footer-bottom{flex-direction:column}.foot-card{text-align:left}.foot-card svg{margin-left:0}
+    }
+  </style>
+</head>
+<body>
+  <nav class="nav">
+    <div class="wrap">
+      <a href="#home" class="brand" aria-label="A Couple of Tools home">
+        <img src="assets/logo.png" alt="A Couple of Tools logo" />
+        <div class="brand-copy"><strong>A Couple<br><span class="orange">of Tools</span></strong><small>Handyman Services</small></div>
+      </a>
+      <div class="links" aria-label="Primary navigation">
+        <a class="active" href="#home">Home</a><a href="#services">Services</a><a href="#about">About Us</a><a href="#work">Our Work</a><a href="#reviews">Reviews</a><a href="#contact">Contact</a>
+      </div>
+      <a class="btn" href="#contact">Get a Quote</a>
+    </div>
+  </nav>
+
+  <main id="home" class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow">Licensed & Insured</div>
+        <h1><span class="rough">A Couple</span><span class="small">of</span><span class="big-orange">Tools</span></h1>
+        <p>We fix what’s broken, install what matters, and tackle the stuff on your list you’ve been ignoring. <strong>Consider it done.</strong></p>
+        <a class="btn" href="#contact">Get a Quote <span>→</span></a>
+        <div class="scribble">Fast replies. Fair prices. <span>No ghosting.</span></div>
+      </div>
+      <div class="hero-art" aria-label="Tool bag and tumbler illustration">
+        <img src="assets/hero-tools.png" alt="Black tool bag with tools and a tumbler reading Not magic. Just tools." />
+      </div>
+    </div>
+  </main>
+
+  <section id="services" class="services">
+    <div class="wrap service-grid">
+      <article class="card"><div class="icon"><svg viewBox="0 0 64 64" fill="none" stroke-width="3"><path d="M10 32 32 12l22 20"/><path d="M18 30v22h28V30"/><path d="M34 41l11-11 5 5-11 11-8 3z"/></svg></div><h3>Repairs</h3><p>Fix the squeaks, leaks, cracks, and broken stuff around your home.</p><div class="mini-line"></div></article>
+      <article class="card"><div class="icon"><svg viewBox="0 0 64 64" fill="none" stroke-width="3"><path d="M10 28h30l8 6v8H23l-13-7z"/><path d="M42 30h12v10H42"/><path d="M19 42v10h16V42"/><path d="M16 24v-7h17v7"/></svg></div><h3>Installs</h3><p>From shelves to fixtures, TVs to barn doors — we install it right.</p><div class="mini-line"></div></article>
+      <article class="card"><div class="icon"><svg viewBox="0 0 64 64" fill="none" stroke-width="3"><rect x="17" y="12" width="30" height="42" rx="3"/><path d="M25 21h14M25 32h14M25 43h8"/><path d="m13 22 3 3 6-7m-9 14 3 3 6-7m-9 14 3 3 6-7"/></svg></div><h3>Punch Lists</h3><p>New home? Remodel? We knock out the to-do list so you don’t.</p><div class="mini-line"></div></article>
+      <article class="card"><div class="icon"><svg viewBox="0 0 64 64" fill="none" stroke-width="3"><rect x="10" y="24" width="44" height="26" rx="3"/><path d="M24 24v-8h16v8M10 34h44M28 34h8"/></svg></div><h3>Odd Jobs</h3><p>The weird, the random, the “can you...?” Yep, we got it.</p><div class="mini-line"></div></article>
+    </div>
+  </section>
+
+  <section id="about" class="band">
+    <div class="wrap why-grid">
+      <div><h2 class="section-title">Why Homeowners<br><span class="orange">Call</span> Us</h2><div class="scribble">Good work. Good people.<br><span>No drama.</span></div></div>
+      <div class="divider"></div>
+      <div class="feature-grid">
+        <div class="feature"><svg viewBox="0 0 64 64"><path d="M32 6 52 15v14c0 14-8 24-20 29C20 53 12 43 12 29V15z"/><path d="m23 32 6 6 13-15"/></svg><div><h4>Reliable & On Time</h4><p>We show up when we say we will. It’s that simple.</p></div></div>
+        <div class="feature"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="24"/><path d="M32 18v28M41 24c-2-5-17-6-18 2-1 6 18 4 17 12-1 8-17 7-20 1"/></svg><div><h4>Honest Pricing</h4><p>Upfront, fair, and transparent. No games. Ever.</p></div></div>
+        <div class="feature"><svg viewBox="0 0 64 64"><path d="M20 55h-8V30h8zM20 34l10-20c2-4 8-2 7 3l-2 10h13c4 0 6 4 4 7l-8 17c-1 3-4 4-7 4H20z"/></svg><div><h4>Quality Workmanship</h4><p>We do it right the first time so you don’t have to think twice.</p></div></div>
+        <div class="feature"><svg viewBox="0 0 64 64"><path d="M12 16h40v28H26L15 54V44h-3z"/></svg><div><h4>Great Communication</h4><p>We keep you in the loop from start to finish.</p></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="work">
+    <div class="wrap">
+      <div class="center-title"><h2>Our Work <span class="orange">Speaks</span> For Itself</h2></div>
+      <div class="gallery">
+        <div class="shot door-before"><span class="tag">Before</span></div><div class="shot door-after"><span class="tag after">After</span></div>
+        <div class="shot deck-before"><span class="tag">Before</span></div><div class="shot deck-after"><span class="tag after">After</span></div>
+        <div class="shot fan-before"><span class="tag">Before</span></div><div class="shot fan-after"><span class="tag after">After</span></div>
+      </div>
+      <a class="btn outline" href="#contact">See More Projects →</a>
+    </div>
+  </section>
+
+  <section id="reviews" class="testimonial">
+    <div class="wrap quote-grid">
+      <div><div class="stars">★★★★★</div><blockquote>They showed up on time, knocked out a long list of projects, and didn’t leave a mess behind. Professional, friendly, and easy to work with. We’ll be calling A Couple of Tools again.</blockquote></div>
+      <div><div class="quote-name">— Jennifer M.</div><div class="quote-role">Happy Homeowner</div></div>
+      <div class="house"><svg viewBox="0 0 100 100"><path d="M18 48 50 20l32 28"/><path d="M28 46v36h44V46"/><path d="M43 82V60h14v22"/></svg></div>
+    </div>
+  </section>
+
+  <footer id="contact">
+    <div class="wrap footer-grid">
+      <div><h2 class="footer-title">Ready to Check<br><span class="orange">Something Off Your List?</span></h2><div class="scribble"><span>Let’s get it done.</span></div></div>
+      <div class="foot-card"><svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="25"/><path d="M24 18c7 14 10 17 22 22l-5 8c-17-5-25-13-30-30z"/></svg><h4>Call or Text</h4><strong>(111) 222-3333</strong><p>Mon–Fri 8am–6pm<br>Sat 9am–2pm</p></div>
+      <div class="foot-card"><svg viewBox="0 0 64 64"><rect x="8" y="14" width="48" height="36" rx="4"/><path d="M10 18l22 18 22-18"/></svg><h4>Email Us</h4><strong>hello@acoupleoftools.com</strong><p>We reply fast.<br>No bots here.</p></div>
+      <div class="foot-card"><svg viewBox="0 0 64 64"><path d="M32 58s18-18 18-34a18 18 0 0 0-36 0c0 16 18 34 18 34z"/><circle cx="32" cy="24" r="6"/></svg><h4>Service Area</h4><strong>Jacksonville, NC</strong><p>+ 25 mile radius<br>And growing!</p></div>
+      <div class="foot-card"><a class="btn" href="mailto:hello@acoupleoftools.com">Get a Quote →</a><div class="scribble" style="margin-top:1rem">No pressure.<br><span>Just solutions.</span></div></div>
+    </div>
+    <div class="wrap footer-bottom"><span>© 2026 A Couple of Tools Handyman Services</span><span>|</span><span>Licensed & Insured</span><div class="socials"><span>f</span><span>◎</span><span>G</span></div></div>
+  </footer>
+</body>
+</html>
